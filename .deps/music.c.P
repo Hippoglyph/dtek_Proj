@@ -1,0 +1,2 @@
+music.c.o: music.c tetris.h /opt/mcb32tools/include/pic32mx.h
+music.c tetris.h /opt/mcb32tools/include/pic32mx.h :

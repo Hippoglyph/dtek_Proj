@@ -1,0 +1,5 @@
+
+
+
+void musicInit();
+void musicUpdate();
