@@ -9,5 +9,9 @@ int main(void) {
 	return 0;
 	*/
 	gameInit();
-	gameTimeUpdate();
+	while(1){
+		gameTimeUpdate();
+		sleep(1);
+	}
+
 }

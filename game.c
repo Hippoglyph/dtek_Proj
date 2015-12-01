@@ -56,6 +56,7 @@ void canvasInit(){
 		canvas[i] = 0x801;
 	}
 	canvas[22] = ~(0x801) & 0xFFF;
+	//canvas[0]=~0;
 }
 
 void printBlockMatrix(){
@@ -91,8 +92,8 @@ void printCanvas(){
 void gameInit(){
 	canvasInit();
 	blockMatrixInit();
-	printBlockMatrix();
-	printCanvas();
+	//printBlockMatrix();
+	//printCanvas();
 	//free(canvas);
 }
 
@@ -105,10 +106,64 @@ void fetchNewBlock(){
 	currentBlock.valid = 1;
 }
 
+int collisionCheck(){
+	int i;
+	for(i = 0; i < 4; i++){
+		if(canvas[currentBlock.posY + i] & (((currentBlock.block >> (3-i)*4))&0xf)<<(7-currentBlock.posX)){
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void paintBlock(){
+	int i;
+	for(i = 0;i < 4; i++){
+		canvas[currentBlock.posY + i] = canvas[currentBlock.posY + i]|((((currentBlock.block >> (3-i)*4))&0xf)<<(7-currentBlock.posX));
+	}
+}
+
+void eraseBlock(){
+	int i;
+	for(i = 0;i < 4; i++){
+		canvas[currentBlock.posY + i] = canvas[currentBlock.posY + i]&~((((currentBlock.block >> (3-i)*4))&0xf)<<(7-currentBlock.posX));
+	}
+}
+
+void clearRow(){
+	int i;
+	for(i = 0; i < 4; i++){
+		if (canvas[currentBlock.posY + i] >= 0xfff){
+			//canvas[currentBlock.posY + i] = 0x801;
+			int j;
+			for(j = currentBlock.posY + i; j > 0; j--){
+				canvas[j] = canvas[j-1];
+			}
+			canvas[0] = 0x801;
+		}
+	}
+}
+
+
 
 void gameTimeUpdate(){
 	if(!currentBlock.valid){
 		fetchNewBlock();
 	}
+	eraseBlock();
+	currentBlock.posY++;
+	if(collisionCheck()){
+		currentBlock.posY--;
+		currentBlock.valid = 0;
+		paintBlock();
+		clearRow();
+	}
+	else
+		paintBlock();
 	
+
+
+	////DEBUG
+	printCanvas();
+	printf(">>>>>>>>>>>>>>>>>>\n");
 }
