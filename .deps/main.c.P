@@ -1,2 +1,2 @@
-main.c.o: main.c tetris.h
-main.c tetris.h :
+main.c.o: main.c tetris.h /opt/mcb32tools/include/pic32mx.h
+main.c tetris.h /opt/mcb32tools/include/pic32mx.h :

@@ -1,6 +1,11 @@
-
-
 void gameInit();
-void gameTimeUpdate();
+int* gameTimeUpdate();
+int* gameIOUpdate(char);
+void moveLeft();
+void moveRight();
+void rotateRight();
+void rotateLeft();
 void musicInit();
 void musicUpdate();
+void displayInit();
+void paintCanvas();
