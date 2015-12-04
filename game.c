@@ -145,7 +145,7 @@ void gameInit(){
 	AD1CON1 = 0x80E0; //Enable the ADC, and set auto conversion
 	*/
 	TMR3 = 0;
-	PR3 = 30000000;
+	PR3 = 131071/16;
 	T3CON = 0x8070;
 }
 

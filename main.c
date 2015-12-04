@@ -44,6 +44,8 @@ int main(void) {
 	TRISFSET = 0x2;
 	TRISDSET = 0xe0;
 
+	TRISDSET = 0xF00;
+
 	
 	displayInit();
 	musicInit();
@@ -51,6 +53,7 @@ int main(void) {
 	char flag = 1;
 	char cool = 0;
 	int coolCount = 0;
+	int intervall = 0;
 	while (1){
 		if(getBtn()){
 			if(flag==1){
@@ -80,7 +83,13 @@ int main(void) {
 
 		if(IFS(0) & 0x1000){
 			IFS(0) &= ~0x1000;
-			paintCanvas(gameTimeUpdate());
+			if (intervall >= getSw()<<1){
+				intervall = 0;
+				paintCanvas(gameTimeUpdate());
+			}
+			else
+				intervall++;
+		
 		}
 		musicUpdate();
 	}
@@ -89,4 +98,8 @@ int main(void) {
 
 int getBtn(){
 	return ((PORTD & 0xe0)>>4)|((PORTF & 0x2)>>1)&0xF;
+}
+
+int getSw(){
+	return ((PORTD & 0xf00)>>8)&0xF;
 }
