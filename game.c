@@ -59,10 +59,10 @@ void blockMatrixInit(){
 void canvasInit(){
 	//int *canvas = (int*)malloc((23)*sizeof(int));
 	int i;
-	for(i = 0; i < 42; i++){
+	for(i = 0; i < 44; i++){
 		canvas[i] = 0x1002;
 	}
-	canvas[42] = ~(0x1002) & 0xFFFF;
+	canvas[44] = ~(0x1002) & 0xFFFF;
 	//canvas[0]=~0;
 }
 

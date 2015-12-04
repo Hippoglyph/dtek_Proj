@@ -95,7 +95,7 @@ void paintCanvas(int* canvas){
 
 	//OLED_send(mirror(0xA9));
 	
-	for(y = 2; y < 43; y++){
+	for(y = 2; y < 45; y++){
 		int paintRow = 0;
 		for(x = 9; x >= 0; x--){
 			int block = (((canvas[y]>>2)>>x) & 0x1);
