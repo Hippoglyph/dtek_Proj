@@ -1,4 +1,5 @@
 void gameInit();
+void invertScreen();
 int* gameTimeUpdate();
 int* gameIOUpdate(char);
 void moveLeft();

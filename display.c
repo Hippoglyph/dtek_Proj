@@ -76,6 +76,19 @@ char mirror(char cell){
 	return newcell;
 }
 
+char screen = 1;
+void invertScreen(){
+	OLED_COMMAND;
+	if (screen){
+		screen = 0;
+		OLED_send(0xA6);
+	}
+	else{
+		screen = 1;
+		OLED_send(0xA7);
+	}
+}
+
 void paintCanvas(int* canvas){
 	int x, y;
 	int i, j;

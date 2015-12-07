@@ -185,6 +185,7 @@ void eraseBlock(){
 
 void clearRow(){
 	int i;
+	int cleared = 0;
 	for(i = 0; i < 4; i++){
 		if (canvas[currentBlock.posY + i] == 0x1ffe){
 			int j;
@@ -192,8 +193,11 @@ void clearRow(){
 				canvas[j] = canvas[j-1];
 			}
 			canvas[0] = 0x1002;
+			cleared = 1;
 		}
 	}
+	if(cleared)
+		invertScreen();
 }
 
 void moveRight(){
